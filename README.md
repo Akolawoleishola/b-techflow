@@ -1,58 +1,44 @@
 # B-Techflow Product Inventory API
 
-A RESTful backend API built with Node.js and Express.js for managing product inventory. The API supports creating, retrieving, updating, and deleting products, with input validation, centralized error handling, and automated tests.
+## About the Project
 
-## Table of Contents
+The B-Techflow Product Inventory API is a backend project developed as part of a group assignment in the Be-Techified program.
 
-- [Project Overview](#project-overview)
-- [Features](#features)
-- [Technologies Used](#technologies-used)
-- [Project Structure](#project-structure)
-- [Requirements](#requirements)
-- [Installation](#installation)
-- [Running the API](#running-the-api)
-- [API Endpoints](#api-endpoints)
-- [Product Data Format](#product-data-format)
-- [Validation Rules](#validation-rules)
-- [Error Handling](#error-handling)
-- [Running Tests](#running-tests)
-- [Current Limitations](#current-limitations)
-- [Future Improvements](#future-improvements)
+The project focuses on building a REST API for managing product inventory. It allows clients to create new products, retrieve product information, update existing products, and delete products.
 
-## Project Overview
+The API also includes input validation and error handling to help ensure that requests are processed correctly.
 
-B-Techflow Product Inventory API is a backend application designed to manage product inventory through HTTP requests.
+## Project Objectives
 
-It allows clients such as Postman or a frontend application to create products, retrieve product information, update existing products, and delete products.
+The main objectives of this project are to:
 
-The project demonstrates REST API development, Express.js routing, controller organization, request validation, error handling, and automated testing.
-
-**Project type:** Backend API  
-**Runtime:** Node.js  
-**Framework:** Express.js  
-**Default port:** 3000  
-**Data storage:** In-memory storage
-
-## Features
-
-- Create new products.
-- Retrieve all products.
-- Retrieve an individual product by ID.
-- Update existing product information.
-- Delete products.
-- Generate unique product IDs automatically.
-- Validate product data before processing requests.
-- Handle invalid requests and missing resources.
-- Return structured JSON responses.
-- Run automated tests using Node.js's built-in test runner.
+- Build a REST API using Node.js and Express.js.
+- Implement the four CRUD operations: Create, Read, Update, and Delete.
+- Validate incoming product data.
+- Handle invalid requests and missing resources appropriately.
+- Test API endpoints using Postman and automated tests.
+- Organize the application into separate routes, controllers, and middleware.
 
 ## Technologies Used
 
-- **Node.js** — JavaScript runtime.
-- **Express.js** — Web framework for building the REST API.
-- **Nodemon** — Automatically restarts the server during development.
-- **Node.js Test Runner** — Runs automated API tests.
-- **Postman** — Manually tests API endpoints.
+- **Node.js** — Runs the JavaScript application on the server.
+- **Express.js** — Handles HTTP requests, routes, and API responses.
+- **Nodemon** — Restarts the server automatically during development.
+- **Postman** — Used to send requests and test API endpoints.
+- **Node.js Test Runner** — Used to run automated tests.
+- **Git and GitHub** — Used for version control and source code management.
+
+## Features
+
+- Create a product.
+- Retrieve all products.
+- Retrieve a single product by its ID.
+- Update an existing product.
+- Delete a product.
+- Generate a unique ID for each product.
+- Validate product information before processing requests.
+- Handle errors, invalid data, and requests for products that do not exist.
+- Run automated tests to check API behavior.
 
 ## Project Structure
 
@@ -72,161 +58,96 @@ B-Techflow/
 │       └── productRoutes.js
 ├── test/
 │   └── product.test.js
-├── .gitignore
 ├── package.json
 ├── package-lock.json
 └── README.md
 ```
 
-### Directory Responsibilities
+### Main Files
 
-| File or Directory | Responsibility |
-|---|---|
-| `src/server.js` | Starts the API server. |
-| `src/app.js` | Configures the Express application and middleware. |
-| `src/routes/productRoutes.js` | Defines product API endpoints. |
-| `src/controllers/productController.js` | Implements product CRUD operations. |
-| `src/data/productStore.js` | Stores products in memory. |
-| `src/middleware/validateProduct.js` | Validates product input. |
-| `src/middleware/errorHandler.js` | Handles application errors. |
-| `test/product.test.js` | Contains automated API tests. |
-| `package.json` | Defines project metadata, dependencies, and scripts. |
+- `app.js` configures the Express application and registers the routes.
+- `server.js` starts the server.
+- `productRoutes.js` defines the product API endpoints.
+- `productController.js` contains the logic for managing products.
+- `productStore.js` holds the product data in memory.
+- `validateProduct.js` validates incoming product information.
+- `errorHandler.js` handles errors and returns appropriate responses.
+- `product.test.js` contains automated tests for the API.
 
-## Requirements
+## Getting Started
 
-Before installing the project, ensure you have:
+### Prerequisites
 
-- [Node.js](https://nodejs.org/) installed.
-- npm, which is included with Node.js.
-- [Git](https://git-scm.com/) for cloning the repository.
-- [Postman](https://www.postman.com/) for manual API testing.
+Before running the project, make sure you have installed:
 
-## Installation
+- Node.js
+- npm
+- Postman (for manual API testing)
 
-### 1. Clone the repository
+### Installation
+
+**1. Clone the repository**
 
 ```bash
 git clone https://github.com/Akolawoleishola/b-techflow.git
 ```
 
-### 2. Navigate to the project directory
+**2. Navigate into the project directory**
 
 ```bash
 cd b-techflow
 ```
 
-### 3. Install dependencies
+**3. Install the dependencies**
 
 ```bash
 npm install
 ```
 
-## Running the API
+### Running the Application
 
-### Start the server
+To start the server normally, run:
 
 ```bash
 npm start
 ```
 
-The API should start on port `3000`, unless a different port is provided through the environment.
-
-Expected terminal output:
-
-```text
-B-Techflow API is running on port 3000
-```
-
-### Development mode
-
-To run the server with automatic restarts during development, use:
+For development, you can run:
 
 ```bash
 npm run dev
 ```
 
-### Base URL
+The server runs on port `3000` by default.
 
-When running locally, the base URL is:
+Once the server is running, open:
 
 ```text
 http://localhost:3000
+```
+
+The API's product endpoints are available under:
+
+```text
+http://localhost:3000/api/products
 ```
 
 ## API Endpoints
 
 All product endpoints use the `/api/products` base path.
 
-| Method | Endpoint | Description |
+| HTTP Method | Endpoint | Description |
 |---|---|---|
-| GET | `/` | Checks whether the API is running. |
-| GET | `/api/products` | Retrieves all products. |
-| GET | `/api/products/:id` | Retrieves a product by ID. |
-| POST | `/api/products` | Creates a new product. |
-| PUT | `/api/products/:id` | Updates an existing product. |
-| DELETE | `/api/products/:id` | Deletes a product. |
+| GET | `/` | Checks whether the API is running |
+| GET | `/api/products` | Retrieves all products |
+| GET | `/api/products/:id` | Retrieves a product by ID |
+| POST | `/api/products` | Creates a new product |
+| PUT | `/api/products/:id` | Updates an existing product |
+| DELETE | `/api/products/:id` | Deletes a product |
 
-### 1. Check API Status
+### Example Product
 
-**Request**
-
-```http
-GET /
-```
-
-Example URL:
-
-```text
-http://localhost:3000/
-```
-
-Returns a JSON message confirming that the API is running.
-
-### 2. Retrieve All Products
-
-**Request**
-
-```http
-GET /api/products
-```
-
-Example URL:
-
-```text
-http://localhost:3000/api/products
-```
-
-Retrieves the products currently stored in memory.
-
-### 3. Retrieve a Product by ID
-
-**Request**
-
-```http
-GET /api/products/:id
-```
-
-Example:
-
-```text
-http://localhost:3000/api/products/PRODUCT_ID
-```
-
-Replace `PRODUCT_ID` with the actual ID returned when a product is created.
-
-If the requested product does not exist, the API returns a `404 Not Found` response.
-
-### 4. Create a Product
-
-**Request**
-
-```http
-POST /api/products
-```
-
-Set the request body to JSON.
-
-Example:
+A product can contain the following fields:
 
 ```json
 {
@@ -238,23 +159,43 @@ Example:
 }
 ```
 
-The API validates the submitted data and generates a unique ID for the new product.
+The API generates the product ID automatically when a product is created.
 
-### 5. Update a Product
+### Creating a Product
 
-**Request**
+Send a `POST` request to:
 
-```http
-PUT /api/products/:id
+```text
+http://localhost:3000/api/products
 ```
 
-Example:
+In Postman, select **Body → raw → JSON**, enter the product data, and send the request.
+
+### Retrieving Products
+
+To retrieve all products, send a `GET` request to:
+
+```text
+http://localhost:3000/api/products
+```
+
+To retrieve one product, use:
 
 ```text
 http://localhost:3000/api/products/PRODUCT_ID
 ```
 
-Example request body:
+Replace `PRODUCT_ID` with the actual ID returned when the product was created.
+
+### Updating a Product
+
+Send a `PUT` request to:
+
+```text
+http://localhost:3000/api/products/PRODUCT_ID
+```
+
+For example, the following JSON updates the product's price and quantity:
 
 ```json
 {
@@ -263,140 +204,76 @@ Example request body:
 }
 ```
 
-The API supports partial updates. You can update specific product fields without resending every field.
+### Deleting a Product
 
-The product ID cannot be changed through an update request.
-
-### 6. Delete a Product
-
-**Request**
-
-```http
-DELETE /api/products/:id
-```
-
-Example:
+Send a `DELETE` request to:
 
 ```text
 http://localhost:3000/api/products/PRODUCT_ID
 ```
 
-Replace `PRODUCT_ID` with the actual product ID.
+Replace `PRODUCT_ID` with the ID of the product you want to delete.
 
-The API removes the specified product from the in-memory collection. Requests to retrieve that product afterward should return `404 Not Found`.
+## Input Validation and Error Handling
 
-## Product Data Format
+The API validates incoming product data to help prevent invalid information from being accepted.
 
-A product contains the following fields:
+The implemented validation includes:
 
-| Field | Type | Description |
-|---|---|---|
-| `id` | String | Automatically generated unique identifier. |
-| `name` | String | Product name. |
-| `description` | String | Description of the product. |
-| `category` | String | Product category. |
-| `price` | Number | Product price. |
-| `quantity` | Integer | Number of units available. |
+- Checking that required product fields contain valid values.
+- Rejecting empty product names, descriptions, and categories.
+- Ensuring that prices are valid, finite, non-negative numbers.
+- Ensuring that quantities are non-negative integers.
+- Rejecting empty update requests and unsupported fields.
+- Preventing attempts to change a product's ID through an update request.
 
-The `id` is generated by the API and should not be supplied or changed by the client.
+The application also handles malformed JSON, unknown routes, and requests for products that do not exist.
 
-## Validation Rules
+## Testing
 
-The API validates product input before processing it.
+The API can be tested manually using Postman and automatically using the Node.js test runner.
 
-- Product names must not be empty.
-- Product descriptions must not be empty.
-- Product categories must not be empty.
-- Prices must be finite, non-negative numbers.
-- Quantities must be non-negative integers.
-- String fields are trimmed to remove surrounding whitespace.
-- Update requests must contain valid fields and cannot change the product ID.
-- Empty update requests are rejected.
-- Unknown product fields are rejected.
+### Running Automated Tests
 
-Invalid input results in a controlled error response rather than a successful product operation.
-
-## Error Handling
-
-The API uses centralized error-handling middleware to return controlled JSON error responses.
-
-Common HTTP status codes include:
-
-| Status Code | Meaning |
-|---|---|
-| `200 OK` | The request succeeded. |
-| `201 Created` | A resource was created, where applicable. |
-| `400 Bad Request` | The request contains invalid data or malformed JSON. |
-| `404 Not Found` | The requested product or route does not exist. |
-| `500 Internal Server Error` | An unexpected server error occurred. |
-
-The exact success status code depends on the operation's implementation.
-
-## Running Tests
-
-The project includes automated tests for its main API operations and error-handling behavior.
-
-Run the tests with:
+From the project directory, run:
 
 ```bash
 npm test
 ```
 
-The test suite covers scenarios including:
+The automated tests cover important API behavior, including product creation, retrieval, updating, deletion, validation, and error responses.
 
-- API welcome endpoint.
-- Unknown routes.
-- Retrieving products.
-- Creating valid products.
-- Rejecting invalid product data.
-- Retrieving individual products.
-- Updating products.
-- Deleting products.
-- Handling malformed JSON.
+The test run completed during development reported **9 tests passed and 0 failed**.
 
-The current test suite has previously completed successfully with **9 tests passed and 0 failed**.
+Run the command again whenever you want to verify the current state of the application.
 
-Run the command again whenever you change the application to verify that the tests still pass.
+## Current Limitation
 
-## Current Limitations
+The current version stores products in an in-memory array rather than a database.
 
-### In-memory storage
+This means that product data is lost when the server restarts. The data is intended for demonstrating and testing the API's functionality.
 
-The application currently stores products in memory rather than in a persistent database.
+## Possible Future Improvements
 
-Consequently:
+Future versions could include:
 
-- Product data is lost when the server restarts.
-- Data is not shared between separate server instances.
-- The current implementation is suitable for demonstrating API functionality, but it is not yet a persistent inventory management solution.
+- Integration with a database such as MongoDB or PostgreSQL.
+- User authentication and authorization.
+- Product search and category filtering.
+- Pagination for large product collections.
+- Additional automated tests.
+- Online deployment.
 
-### No frontend
+These are possible future improvements rather than features currently included in the project.
 
-This project provides a backend API only. Clients such as Postman can communicate with it using HTTP requests.
+## Repository
 
-A graphical user interface is outside the current project scope.
+The source code is available on GitHub:
 
-## Future Improvements
-
-Potential improvements include:
-
-- Integrating a database such as MongoDB or PostgreSQL.
-- Adding persistent product storage.
-- Implementing authentication and authorization if required.
-- Adding pagination and product search.
-- Supporting product filtering by category.
-- Deploying the API to a hosting platform.
-- Expanding automated test coverage.
-
-These are possible future enhancements and are not claims about existing functionality.
-
-## Author and Repository
-
-**Project:** B-Techflow Product Inventory API
-
-**GitHub Repository:**  
 https://github.com/Akolawoleishola/b-techflow
 
-## License
+## Conclusion
 
-No license has been specified for this project. Add a license if required by the project owner or assignment.
+The B-Techflow Product Inventory API demonstrates how a backend application can manage product information through RESTful endpoints.
+
+Through this project, I have had the opportunity to work with API development concepts, CRUD operations, request validation, error handling, and testing. The project also provides a foundation for further improvements, including database integration and deployment.
